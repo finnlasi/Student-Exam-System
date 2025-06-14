@@ -129,7 +129,7 @@ int selectClass() {
 void menu(int classIndex) {
     while (true) {
         system("CLS");
-        cout << "\n1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Studentï¿½s Class\n5. Close the Program\nChoice: ";
+        cout << "\n1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Student's Class\n5. Close the Program\nChoice: ";
         int choice;
         cin >> choice;
         cin.ignore();
