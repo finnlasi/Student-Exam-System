@@ -121,7 +121,7 @@ void loadFromFile(int classIndex) {
 
 int selectClass() {
     int choice;
-    cout << "\nSelect Class:\n1. A\n2. B\n3. C\n4. D\nChoice: ";
+    cout << "Select Class:\n1. A\n2. B\n3. C\n4. D\nChoice: ";
     cin >> choice;
     return choice - 1;
 }
@@ -129,7 +129,7 @@ int selectClass() {
 void menu(int classIndex) {
     while (true) {
         system("CLS");
-        cout << "\n1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Student's Class\n5. Close the Program\nChoice: ";
+        cout << "1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Student's Class\n5. Close the Program\nChoice: ";
         int choice;
         cin >> choice;
         cin.ignore();
