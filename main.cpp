@@ -59,7 +59,7 @@ string getGradeStr(int mark) {
         return "D";
     if (mark >= 40 && mark <= 44) 
         return "E";
-    if (mark >= 1 && mark <= 39) 
+    if (mark >= 0 && mark <= 39) 
         return "G";
     return "Invalid Mark"; // For marks not between 1 and 100
 }
