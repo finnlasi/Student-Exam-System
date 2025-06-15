@@ -1,0 +1,74 @@
+
+Project Overview
+This C++ program manages student marks across four classes (A-D). It allows the user to:
+- Register a new student
+- Update student marks
+- View student marks (with rankings)
+- Switch between classes
+- Save/load data from CSV files
+
+1. Data Structures
+1.1 Student Struct
+struct Student {
+    string name;
+    int marks[5]; // Subjects: BM, ENG, MATH, SCI, HIS
+    float percentage;
+    char overallGrade;
+};
+
+2. Global Variables & Constants
+const int CLASS_COUNT = 4;
+vector<Student> classes[CLASS_COUNT];
+string filenames[CLASS_COUNT] = {"class_A.csv", "class_B.csv", "class_C.csv", "class_D.csv"};
+
+3. Helper Functions
+- getGradeStr: Returns grade based on individual mark.
+- getGrade: Returns overall grade based on percentage.
+- inputMark: Validates and inputs mark.
+- calculateResults: Calculates average and grade.
+
+4. File Operations
+- saveToFile: Sorts students alphabetically and saves to CSV.
+- loadFromFile: Loads students from CSV and recalculates grades.
+
+5. User Interface
+- selectClass: Class selection (A-D).
+- menu: Class operations menu.
+
+6. main Function
+- Loads data for all classes at startup.
+- Loops through class selection and menu operations until exit.
+
+7. Program Flowchart
+Start
+  |
+  |---> Load data from CSV files
+  |
+  |---> Loop:
+  |         |---> Select class (A-D)
+  |         |---> Menu:
+  |         |         |---> Register a new student
+  |         |         |---> Update student marks
+  |         |         |---> View & rank students
+  |         |         |---> Switch class
+  |         |         |---> Exit program
+  |         |
+  |         |---> Save data after updates
+  |
+  |---> End
+
+8. Notable Features
+- CSV-based data storage
+- Dynamic data handling (vector)
+- Input validation
+- User-friendly interface
+
+9. Possible Future Improvements
+- Add more subjects or customization
+- Password-protected admin features
+- Graphical interface (Qt/SFML)
+- Generate PDF reports
+- Export/import entire dataset
+
+Conclusion
+This documentation explains every part of the code, ensuring it's well-organized and maintainable.
