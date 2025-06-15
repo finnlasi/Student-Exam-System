@@ -11,14 +11,14 @@ struct Student {
     string name;
     int marks[5]; // BM, ENG, MATH, SCI, HIS
     float percentage;
-    char overallGrade;
+    string overallGrade;
 };
 
 extern const int CLASS_COUNT;
 extern vector<Student> classes[];
 
 string getGradeStr(int mark);
-char getGrade(float percent);
+//char getGrade(float percent);
 int inputMark(const string &subject);
 void calculateResults(Student &s);
 void saveToFile(int classIndex);
@@ -41,26 +41,38 @@ vector<Student> classes[CLASS_COUNT];
 string filenames[CLASS_COUNT] = {"class_A.csv", "class_B.csv", "class_C.csv", "class_D.csv"};
 
 string getGradeStr(int mark) {
-    if (mark >= 90) return "A+";
-    if (mark >= 80) return "A";
-    if (mark >= 70) return "A-";
-    if (mark >= 65) return "B+";
-    if (mark >= 60) return "B";
-    if (mark >= 55) return "C+";
-    if (mark >= 50) return "C";
-    if (mark >= 45) return "D";
-    if (mark >= 40) return "E";
-    return "G";
+    if (mark >= 90 && mark <= 100) 
+        return "A+";
+    if (mark >= 80 && mark <= 89) 
+        return "A";
+    if (mark >= 70 && mark <= 79) 
+        return "A-";
+    if (mark >= 65 && mark <= 69) 
+        return "B";
+    if (mark >= 60 && mark <= 64) 
+        return "B-";
+    if (mark >= 55 && mark <= 59) 
+        return "C";
+    if (mark >= 50 && mark <= 54)
+        return "C-";
+    if (mark >= 45 && mark <= 49)
+        return "D";
+    if (mark >= 40 && mark <= 44) 
+        return "E";
+    if (mark >= 1 && mark <= 39) 
+        return "G";
+    return "Invalid Mark"; // For marks not between 1 and 100
 }
 
-char getGrade(float percent) {
-    if (percent >= 70) return 'A';
-    if (percent >= 60) return 'B';
-    if (percent >= 50) return 'C';
-    if (percent >= 45) return 'D';
-    if (percent >= 40) return 'E';
-    return 'F';
-}
+
+// char getGrade(float percent) {
+//     if (percent >= 70) return 'A';
+//     if (percent >= 60) return 'B';
+//     if (percent >= 50) return 'C';
+//     if (percent >= 45) return 'D';
+//     if (percent >= 40) return 'E';
+//     return 'F';
+// }
 
 int inputMark(const string &subject) {
     int mark;
@@ -78,7 +90,7 @@ void calculateResults(Student &s) {
     int total = 0;
     for (int i = 0; i < 5; ++i) total += s.marks[i];
     s.percentage = total / 5.0;
-    s.overallGrade = getGrade(s.percentage);
+    s.overallGrade = getGradeStr(s.percentage);
 }
 
 void saveToFile(int classIndex) {
