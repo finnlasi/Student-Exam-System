@@ -18,7 +18,6 @@ extern const int CLASS_COUNT;
 extern vector<Student> classes[];
 
 string getGradeStr(int mark);
-//char getGrade(float percent);
 int inputMark(const string &subject);
 void calculateResults(Student &s);
 void saveToFile(int classIndex);
@@ -61,18 +60,8 @@ string getGradeStr(int mark) {
         return "E";
     if (mark >= 0 && mark <= 39) 
         return "G";
-    return "Invalid Mark"; // For marks not between 1 and 100
+    return "Invalid Mark";//if the inputted mark not met any criteria
 }
-
-
-// char getGrade(float percent) {
-//     if (percent >= 70) return 'A';
-//     if (percent >= 60) return 'B';
-//     if (percent >= 50) return 'C';
-//     if (percent >= 45) return 'D';
-//     if (percent >= 40) return 'E';
-//     return 'F';
-// }
 
 int inputMark(const string &subject) {
     int mark;
