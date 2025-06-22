@@ -1,1 +1,1 @@
-system("cls");
+Student

@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-struct Student {
+struct Pelajar {
     string name;
     int marks[5]; // BM, ENG, MATH, SCI, HIS
     float percentage;
@@ -15,11 +15,11 @@ struct Student {
 };
 
 extern const int CLASS_COUNT;
-extern vector<Student> classes[];
+extern vector<Pelajar> classes[];
 
-string getGradeStr(int mark);
-int inputMark(const string &subject);
-void calculateResults(Student &s);
+string nakGredStr(int mark);
+int nakMarkah(const string &subject);
+void calculateResults(Pelajar &s);
 void saveToFile(int classIndex);
 void loadFromFile(int classIndex);
 int selectClass();
@@ -36,10 +36,10 @@ int main() {
     return 0;
 }
 const int CLASS_COUNT = 4;
-vector<Student> classes[CLASS_COUNT];
+vector<Pelajar> classes[CLASS_COUNT];
 string filenames[CLASS_COUNT] = {"class_A.csv", "class_B.csv", "class_C.csv", "class_D.csv"};
 
-string getGradeStr(int mark) {
+string nakGredStr(int mark) {
     if (mark >= 90 && mark <= 100) 
         return "A+";
     if (mark >= 80 && mark <= 89) 
@@ -63,7 +63,7 @@ string getGradeStr(int mark) {
     return "Invalid Mark";//if the inputted mark not met any criteria
 }
 
-int inputMark(const string &subject) {
+int nakMarkah(const string &subject) {
     int mark;
     do {
         cout << subject << ": ";
@@ -75,15 +75,15 @@ int inputMark(const string &subject) {
     return mark;
 }
 
-void calculateResults(Student &s) {
+void calculateResults(Pelajar &s) {
     int total = 0;
     for (int i = 0; i < 5; ++i) total += s.marks[i];
     s.percentage = total / 5.0;
-    s.overallGrade = getGradeStr(s.percentage);
+    s.overallGrade = nakGredStr(s.percentage);
 }
 
 void saveToFile(int classIndex) {
-    sort(classes[classIndex].begin(), classes[classIndex].end(), [](const Student &a, const Student &b) {
+    sort(classes[classIndex].begin(), classes[classIndex].end(), [](const Pelajar &a, const Pelajar &b) {
         return a.name < b.name;
     });
 
@@ -103,7 +103,7 @@ void loadFromFile(int classIndex) {
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
-        Student s;
+        Pelajar s;
         getline(ss, s.name, ',');
         for (int i = 0; i < 5; ++i) {
             string mark;
@@ -138,14 +138,14 @@ void menu(int classIndex) {
 
         switch (choice) {
             case 1: {
-                Student s;
+                Pelajar s;
                 cout << "Enter student name: ";
                 getline(cin, s.name);
-                s.marks[0] = inputMark("BM");
-                s.marks[1] = inputMark("ENG");
-                s.marks[2] = inputMark("MATH");
-                s.marks[3] = inputMark("SCI");
-                s.marks[4] = inputMark("HIS");
+                s.marks[0] = nakMarkah("BM");
+                s.marks[1] = nakMarkah("ENG");
+                s.marks[2] = nakMarkah("MATH");
+                s.marks[3] = nakMarkah("SCI");
+                s.marks[4] = nakMarkah("HIS");
                 calculateResults(s);
                 classes[classIndex].push_back(s);
                 saveToFile(classIndex);
@@ -179,13 +179,13 @@ void menu(int classIndex) {
                     break;
                 }
 
-                Student &s = classes[classIndex][choice - 1];
+                Pelajar &s = classes[classIndex][choice - 1];
                 cout << "Enter new marks for " << s.name << ":\n";
-                s.marks[0] = inputMark("BM");
-                s.marks[1] = inputMark("ENG");
-                s.marks[2] = inputMark("MATH");
-                s.marks[3] = inputMark("SCI");
-                s.marks[4] = inputMark("HIS");
+                s.marks[0] = nakMarkah("BM");
+                s.marks[1] = nakMarkah("ENG");
+                s.marks[2] = nakMarkah("MATH");
+                s.marks[3] = nakMarkah("SCI");
+                s.marks[4] = nakMarkah("HIS");
                 calculateResults(s);
                 saveToFile(classIndex);
                 cout << "Marks updated for " << s.name << "!\n";
@@ -199,8 +199,8 @@ void menu(int classIndex) {
                     break;
                 }
 
-                vector<Student> ranked = classes[classIndex];
-                sort(ranked.begin(), ranked.end(), [](const Student &a, const Student &b) {
+                vector<Pelajar> ranked = classes[classIndex];
+                sort(ranked.begin(), ranked.end(), [](const Pelajar &a, const Pelajar &b) {
                     return a.percentage > b.percentage;
                 });
 
@@ -215,10 +215,10 @@ void menu(int classIndex) {
                      << setw(6) << "Rank" << endl;
 
                 for (size_t i = 0; i < ranked.size(); ++i) {
-                    const Student &s = ranked[i];
+                    const Pelajar &s = ranked[i];
                     cout << left << setw(4) << i + 1 << setw(15) << s.name;
                     for (int j = 0; j < 5; ++j) {
-                        cout << setw(6) << s.marks[j] << setw(4) << getGradeStr(s.marks[j]);
+                        cout << setw(6) << s.marks[j] << setw(4) << nakGredStr(s.marks[j]);
                     }
                     cout << setw(10) << s.percentage << setw(6) << s.overallGrade << setw(6) << i + 1 << endl;
                 }

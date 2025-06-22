@@ -23,7 +23,6 @@ string filenames[CLASS_COUNT] = {"class_A.csv", "class_B.csv", "class_C.csv", "c
 
 3. Helper Functions
 - getGradeStr: Returns grade based on individual mark.
-- getGrade: Returns overall grade based on percentage.
 - inputMark: Validates and inputs mark.
 - calculateResults: Calculates average and grade.
 
