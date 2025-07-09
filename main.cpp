@@ -18,7 +18,7 @@ extern const int CLASS_COUNT;
 extern vector<Pelajar> classes[];
 
 string nakGredStr(int );
-int nakMarkah(const string &subect);
+int nakMarkah(const string &subject);
 void calculateResults(Pelajar &);
 void saveToFile(int );
 void loadFromFile(int );
@@ -63,7 +63,7 @@ string nakGredStr(int mark) {
     return "Invalid Mark";//if the inputted mark not met any criteria
 }
 
-nakMarkah(const string &subject) {
+int nakMarkah(const string &subject) {
     int mark;
     do {
         cout << subject << ": ";
@@ -75,14 +75,14 @@ nakMarkah(const string &subject) {
     return mark;
 }
 
-calculateResults(Pelajar &s) {
+void calculateResults(Pelajar &s) {
     int total = 0;
     for (int i = 0; i < 5; ++i) total += s.marks[i];
     s.percentage = total / 5.0;
     s.overallGrade = nakGredStr(s.percentage);
 }
 
-saveToFile(int classIndex) {
+void saveToFile(int classIndex) {
     sort(classes[classIndex].begin(), classes[classIndex].end(), [](const Pelajar &a, const Pelajar &b) {
         return a.name < b.name;
     });
@@ -97,7 +97,7 @@ saveToFile(int classIndex) {
     file.close();
 }
 
-loadFromFile(int classIndex) {
+void loadFromFile(int classIndex) {
     classes[classIndex].clear();
     ifstream file(filenames[classIndex]);
     string line;
@@ -120,14 +120,14 @@ loadFromFile(int classIndex) {
     file.close();
 }
 
-selectClass() {
+int selectClass() {
     int choice;
     cout << "Select Class:\n1. A\n2. B\n3. C\n4. D\nChoice: ";
     cin >> choice;
     return choice - 1;
 }
 
-menu(int classIndex) {
+void menu(int classIndex) {
     while (true) {
         system("CLS");
         cout << "1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Student's Class\n5. Close the Program\nChoice: ";
