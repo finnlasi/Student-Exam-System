@@ -17,13 +17,13 @@ struct Pelajar {
 extern const int CLASS_COUNT;
 extern vector<Pelajar> classes[];
 
-string nakGredStr(int mark);
-int nakMarkah(const string &subject);
-void calculateResults(Pelajar &s);
-void saveToFile(int classIndex);
-void loadFromFile(int classIndex);
+string nakGredStr(int );
+int nakMarkah(const string &subect);
+void calculateResults(Pelajar &);
+void saveToFile(int );
+void loadFromFile(int );
 int selectClass();
-void menu(int classIndex);
+void menu(int );
 
 int main() {
     for (int i = 0; i < CLASS_COUNT; ++i)
@@ -63,7 +63,7 @@ string nakGredStr(int mark) {
     return "Invalid Mark";//if the inputted mark not met any criteria
 }
 
-int nakMarkah(const string &subject) {
+nakMarkah(const string &subject) {
     int mark;
     do {
         cout << subject << ": ";
@@ -75,14 +75,14 @@ int nakMarkah(const string &subject) {
     return mark;
 }
 
-void calculateResults(Pelajar &s) {
+calculateResults(Pelajar &s) {
     int total = 0;
     for (int i = 0; i < 5; ++i) total += s.marks[i];
     s.percentage = total / 5.0;
     s.overallGrade = nakGredStr(s.percentage);
 }
 
-void saveToFile(int classIndex) {
+saveToFile(int classIndex) {
     sort(classes[classIndex].begin(), classes[classIndex].end(), [](const Pelajar &a, const Pelajar &b) {
         return a.name < b.name;
     });
@@ -97,7 +97,7 @@ void saveToFile(int classIndex) {
     file.close();
 }
 
-void loadFromFile(int classIndex) {
+loadFromFile(int classIndex) {
     classes[classIndex].clear();
     ifstream file(filenames[classIndex]);
     string line;
@@ -120,14 +120,14 @@ void loadFromFile(int classIndex) {
     file.close();
 }
 
-int selectClass() {
+selectClass() {
     int choice;
     cout << "Select Class:\n1. A\n2. B\n3. C\n4. D\nChoice: ";
     cin >> choice;
     return choice - 1;
 }
 
-void menu(int classIndex) {
+menu(int classIndex) {
     while (true) {
         system("CLS");
         cout << "1. Register a New Student\n2. Update Student Marks\n3. View Student Marks\n4. Switch Student's Class\n5. Close the Program\nChoice: ";
