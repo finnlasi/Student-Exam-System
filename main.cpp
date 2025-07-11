@@ -24,14 +24,25 @@ void saveToFile(int );
 void loadFromFile(int );
 int selectClass();
 void menu(int );
+bool passcheck(int);
+
 
 int main() {
+    bool access;
     for (int i = 0; i < CLASS_COUNT; ++i)
         loadFromFile(i);
 
     while (true) {
         int classIndex = selectClass();
-        menu(classIndex);
+        access=passcheck(classIndex);
+        if(access==true){
+            menu(classIndex);  
+        }
+        else{
+            cout<<"ACCESS DENIEDD\n";
+            exit(0);
+        }
+        
     }
     return 0;
 }
@@ -233,4 +244,16 @@ void menu(int classIndex) {
                 cout << "Invalid choice.\n";
         }
     }
+}
+bool passcheck(int classes) {
+    string password[4] = { "bottle", "tumbler", "table", "chair" };
+    string enteredPassword;
+
+    cout << "Enter the password: ";
+    cin >> enteredPassword;
+
+if (password[classes] == enteredPassword)
+    return true;
+else
+    return false;
 }
